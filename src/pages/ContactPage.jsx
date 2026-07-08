@@ -44,7 +44,7 @@ export function ContactPage() {
         title="お問い合わせ"
         body="出演依頼・ライブ予約・制作のご相談はこちらから。"
         image={assets.uiMockupsReal.contact.primary}
-        imageClass="object-[center_18%]"
+        imageClass="object-[center_top] md:object-[center_18%]"
       />
       <section className="mx-auto grid max-w-[1280px] gap-16 px-6 py-20 md:px-10 lg:grid-cols-[420px_1fr]">
         <div className="space-y-12">

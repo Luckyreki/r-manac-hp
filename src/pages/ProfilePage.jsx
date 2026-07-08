@@ -10,13 +10,13 @@ export function ProfilePage() {
         label="Profile"
         title="プロフィール"
         image={assets.uiMockupsReal.profile.primary}
-        imageClass="translate-x-[12%] object-[70%_48%]"
+        imageClass="object-[center_top] md:translate-x-[12%] md:object-[70%_48%]"
       />
       <section className="mx-auto grid max-w-[1140px] items-center gap-16 px-6 pb-10 pt-8 md:grid-cols-[420px_1fr] md:px-10">
         <motion.img
           src={assets.uiMockupsReal.profile.primary}
           alt="R-MANAC profile"
-          className="h-[520px] w-full object-cover object-[center_56%]"
+          className="aspect-[4/5] w-full object-cover object-[center_top] md:h-[520px] md:aspect-auto md:object-[center_56%]"
           {...reveal}
         />
         <motion.div className="whitespace-pre-line text-lg leading-10 text-[#171717]" {...reveal}>

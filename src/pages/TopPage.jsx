@@ -13,15 +13,10 @@ const featureImages = [
 export function TopPage() {
   return (
     <PageShell>
-      <section className="relative isolate min-h-[680px] overflow-hidden">
-        <img
-          src={assets.uiMockupsReal.top.primary}
-          alt=""
-          className="absolute right-0 top-0 -z-10 h-[610px] w-[62%] object-cover object-[82%_center]"
-        />
-        <div className="absolute inset-y-0 right-[34%] -z-10 h-[610px] w-[38%] bg-gradient-to-r from-[var(--color-paper)] via-[var(--color-paper)] to-transparent" />
+      <section className="relative isolate overflow-hidden md:min-h-[680px]">
+        <div className="absolute inset-y-0 right-[34%] -z-10 hidden h-[610px] w-[38%] bg-gradient-to-r from-[var(--color-paper)] via-[var(--color-paper)] to-transparent md:block" />
         <motion.div
-          className="mx-auto max-w-[1280px] px-6 py-28 md:px-10 md:py-36"
+          className="mx-auto max-w-[1280px] px-6 py-16 md:px-10 md:py-36"
           initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: "easeOut" }}
@@ -29,8 +24,8 @@ export function TopPage() {
           <p className="mb-6 text-sm font-bold uppercase tracking-[0.22em] text-[var(--color-accent)]">
             Acoustic Loop Artist
           </p>
-          <h1 className="text-6xl font-black leading-none md:text-8xl">{siteMeta.name}</h1>
-          <p className="mt-9 whitespace-pre-line text-4xl font-black leading-tight md:text-5xl">
+          <h1 className="text-5xl font-black leading-none md:text-8xl">{siteMeta.name}</h1>
+          <p className="mt-8 whitespace-pre-line text-3xl font-black leading-tight md:mt-9 md:text-5xl">
             {siteMeta.tagline.replace("、", "、\n")}
           </p>
           <p className="mt-7 whitespace-pre-line text-xl leading-9 text-[#2a2a2a]">{siteMeta.base}</p>
@@ -40,6 +35,11 @@ export function TopPage() {
               音源を聴く
             </ButtonLink>
           </div>
+          <img
+            src={assets.uiMockupsReal.top.primary}
+            alt=""
+            className="mt-12 aspect-[4/5] w-full object-cover object-[center_top] md:absolute md:right-0 md:top-0 md:-z-10 md:mt-0 md:h-[610px] md:w-[62%] md:object-[82%_center]"
+          />
         </motion.div>
       </section>
 

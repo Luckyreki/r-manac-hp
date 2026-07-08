@@ -38,7 +38,13 @@ export function LivePage() {
         <SectionHeading title="過去のライブ" />
         <div className="mt-8 grid grid-cols-2 gap-9 lg:grid-cols-4">
           {[assets.photos.liveBlueGuitar, assets.uiMockupsReal.live.primary, assets.uiMockupsReal.live.featured, assets.uiMockupsReal.live.secondary].map((image) => (
-            <motion.img key={image} src={image} alt="" className="h-[120px] w-full object-cover" {...reveal} />
+            <motion.img
+              key={image}
+              src={image}
+              alt=""
+              className="aspect-[4/3] w-full object-cover object-[center_top] lg:h-[120px] lg:aspect-auto"
+              {...reveal}
+            />
           ))}
         </div>
       </section>

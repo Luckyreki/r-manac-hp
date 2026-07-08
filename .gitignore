@@ -54,3 +54,6 @@ ui-mockups-real/
 /*.JPEG
 /*.png
 /*.PNG
+
+# Vercel Drop upload files
+*.zip

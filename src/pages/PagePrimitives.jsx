@@ -7,14 +7,9 @@ export function PageShell({ children }) {
 
 export function HeroBand({ label, title, body, image, imageClass = "" }) {
   return (
-    <section className="relative isolate min-h-[500px] overflow-hidden">
-      <img
-        src={image}
-        alt=""
-        className={`absolute right-0 top-0 -z-10 h-full w-[64%] object-cover ${imageClass}`}
-      />
-      <div className="absolute inset-y-0 right-[28%] -z-10 w-[42%] bg-gradient-to-r from-[var(--color-paper)] via-[var(--color-paper)] to-transparent" />
-      <div className="mx-auto max-w-[1280px] px-6 py-28 md:px-10 md:py-36">
+    <section className="relative isolate overflow-hidden md:min-h-[500px]">
+      <div className="absolute inset-y-0 right-[28%] -z-10 hidden w-[42%] bg-gradient-to-r from-[var(--color-paper)] via-[var(--color-paper)] to-transparent md:block" />
+      <div className="mx-auto max-w-[1280px] px-6 py-16 md:px-10 md:py-36">
         <motion.div
           className="max-w-xl"
           initial={false}
@@ -28,6 +23,11 @@ export function HeroBand({ label, title, body, image, imageClass = "" }) {
           {body && <p className="mt-8 whitespace-pre-line text-xl leading-9 text-[#2a2a2a]">{body}</p>}
           <div className="mt-9 h-1 w-14 bg-[var(--color-accent)]" />
         </motion.div>
+        <img
+          src={image}
+          alt=""
+          className={`mt-10 aspect-[4/5] w-full object-cover object-[center_top] md:absolute md:right-0 md:top-0 md:-z-10 md:mt-0 md:h-full md:w-[64%] md:object-cover ${imageClass}`}
+        />
       </div>
     </section>
   );

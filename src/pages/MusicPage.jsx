@@ -32,7 +32,7 @@ export function MusicPage() {
         title="音楽"
         body={"たった１本のギターから紡ぎ出される、\n幾重にも重なる音の魔法。"}
         image={assets.uiMockupsReal.music.primary}
-        imageClass="object-[82%_center]"
+        imageClass="object-[center_top] md:object-[82%_center]"
       />
       <section className="mx-auto grid max-w-[1280px] gap-14 px-6 py-20 md:px-10 lg:grid-cols-[330px_1fr]">
         <div>
@@ -80,10 +80,10 @@ export function MusicPage() {
           href={musicLinks.video}
           target="_blank"
           rel="noreferrer"
-          className="relative h-[350px] overflow-hidden"
+          className="relative aspect-[4/5] overflow-hidden md:h-[350px] md:aspect-auto"
           {...reveal}
         >
-          <img src={assets.uiMockupsReal.music.secondary} alt="" className="h-full w-full object-cover" />
+          <img src={assets.uiMockupsReal.music.secondary} alt="" className="h-full w-full object-cover object-[center_top]" />
           <span className="absolute inset-0 m-auto flex h-24 w-24 items-center justify-center rounded-full border-4 border-white text-white">
             <Play size={38} fill="currentColor" />
           </span>
@@ -94,7 +94,7 @@ export function MusicPage() {
               key={image}
               src={image}
               alt=""
-              className={`h-[140px] w-full object-cover lg:h-[100px] ${className}`}
+              className={`aspect-[16/9] w-full object-cover lg:h-[100px] lg:aspect-auto ${className}`}
               {...reveal}
             />
           ))}
