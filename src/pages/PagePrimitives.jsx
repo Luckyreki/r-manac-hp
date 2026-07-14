@@ -26,7 +26,7 @@ export function HeroBand({ label, title, body, image, imageClass = "" }) {
         <img
           src={image}
           alt=""
-          className={`mt-10 aspect-[4/5] w-full object-cover object-[center_top] md:absolute md:right-0 md:top-0 md:-z-10 md:mt-0 md:h-full md:w-[64%] md:object-cover ${imageClass}`}
+          className={`hidden md:absolute md:right-0 md:top-0 md:-z-10 md:block md:h-full md:w-[64%] md:object-cover ${imageClass}`}
         />
       </div>
     </section>
