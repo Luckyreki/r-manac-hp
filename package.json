@@ -11,13 +11,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "^11.7.0",
-      "onFail": "download"
-    }
-  },
   "type": "module",
   "dependencies": {
     "@tailwindcss/vite": "^4.3.1",
