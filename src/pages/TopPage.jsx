@@ -38,7 +38,7 @@ export function TopPage() {
           <img
             src={assets.uiMockupsReal.top.primary}
             alt=""
-            className="mt-12 aspect-[4/5] w-full object-cover object-[center_top] md:absolute md:right-0 md:top-0 md:-z-10 md:mt-0 md:h-[610px] md:w-[62%] md:object-[82%_center]"
+            className="hidden md:absolute md:right-0 md:top-0 md:-z-10 md:block md:h-[610px] md:w-[62%] md:object-cover md:object-[82%_center]"
           />
         </motion.div>
       </section>
