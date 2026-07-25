@@ -7,6 +7,19 @@ export const siteMeta = {
   base: "大阪・堺を拠点に活動するアコギ・ループアーティスト。",
 };
 
+export const featuredLive = {
+  date: "2026.07.18（土）",
+  title: "堺轟音",
+  venue: "堺東 Goith",
+  time: "OPEN 18:00 / START 18:30",
+  price: "ADV ¥2800 / DOOR ¥3300",
+  visibleUntil: "2026-07-19T00:00:00+09:00",
+};
+
+export function isLiveVisible(live = featuredLive, now = Date.now()) {
+  return now < new Date(live.visibleUntil).getTime();
+}
+
 export const featureLinks = [
   {
     title: "Profile",

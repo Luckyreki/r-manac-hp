@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { assets } from "../data/assets.js";
+import { featuredLive, isLiveVisible } from "../data/site.js";
 import { ButtonLink, HeroBand, PageShell, SectionHeading, reveal } from "./PagePrimitives.jsx";
 
 export function LivePage() {
+  const showFeaturedLive = isLiveVisible();
+
   return (
     <PageShell>
       <HeroBand
@@ -11,29 +14,31 @@ export function LivePage() {
         body="音が重なり、会場が揺れ、心が共鳴する。"
         image={assets.uiMockupsReal.live.primary}
       />
-      <motion.section
-        className="mx-auto grid max-w-[1280px] gap-10 bg-white px-6 py-10 shadow-[var(--shadow-soft)] md:px-10 lg:grid-cols-[320px_1fr_220px]"
-        {...reveal}
-      >
-        <img
-          src={assets.photos.nextLiveFlyer}
-          alt="2026年7月18日 堺轟音 フライヤー"
-          className="h-[360px] w-full bg-[var(--color-paper)] object-contain"
-        />
-        <div className="self-center">
-          <span className="inline-flex bg-[var(--color-accent)] px-5 py-2 text-sm font-bold text-white">次回ライブ</span>
-          <h2 className="mt-6 text-4xl font-black md:text-5xl">2026.07.18（土）</h2>
-          <p className="mt-5 text-2xl font-black">堺轟音</p>
-          <p className="mt-4 text-xl">堺東 Goith</p>
-          <p className="mt-3 text-lg text-[var(--color-muted)]">OPEN 18:00 / START 18:30</p>
-          <p className="mt-2 text-lg text-[var(--color-muted)]">ADV ¥2800 / DOOR ¥3300</p>
-        </div>
-        <div className="self-center">
-          <ButtonLink href="/reserve" className="w-full">
-            予約する
-          </ButtonLink>
-        </div>
-      </motion.section>
+      {showFeaturedLive && (
+        <motion.section
+          className="mx-auto grid max-w-[1280px] gap-10 bg-white px-6 py-10 shadow-[var(--shadow-soft)] md:px-10 lg:grid-cols-[320px_1fr_220px]"
+          {...reveal}
+        >
+          <img
+            src={assets.photos.nextLiveFlyer}
+            alt={`${featuredLive.date} ${featuredLive.title} フライヤー`}
+            className="h-[360px] w-full bg-[var(--color-paper)] object-contain"
+          />
+          <div className="self-center">
+            <span className="inline-flex bg-[var(--color-accent)] px-5 py-2 text-sm font-bold text-white">次回ライブ</span>
+            <h2 className="mt-6 text-4xl font-black md:text-5xl">{featuredLive.date}</h2>
+            <p className="mt-5 text-2xl font-black">{featuredLive.title}</p>
+            <p className="mt-4 text-xl">{featuredLive.venue}</p>
+            <p className="mt-3 text-lg text-[var(--color-muted)]">{featuredLive.time}</p>
+            <p className="mt-2 text-lg text-[var(--color-muted)]">{featuredLive.price}</p>
+          </div>
+          <div className="self-center">
+            <ButtonLink href="/reserve" className="w-full">
+              予約する
+            </ButtonLink>
+          </div>
+        </motion.section>
+      )}
       <section className="mx-auto max-w-[1280px] px-6 py-20 md:px-10">
         <SectionHeading title="過去のライブ" />
         <div className="mt-8 grid grid-cols-2 gap-9 lg:grid-cols-4">

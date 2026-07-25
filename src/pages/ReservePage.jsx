@@ -1,23 +1,25 @@
 import { useState } from "react";
 import { assets } from "../data/assets.js";
-import { PageShell } from "./PagePrimitives.jsx";
+import { featuredLive, isLiveVisible } from "../data/site.js";
+import { ButtonLink, PageShell } from "./PagePrimitives.jsx";
 
 const reserveEmail = "rmanac0805@gmail.com";
 
 export function ReservePage() {
   const [name, setName] = useState("");
   const [tickets, setTickets] = useState(1);
+  const showReservation = isLiveVisible();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const subject = "【チケット予約】2026.07.18 堺轟音";
+    const subject = `【チケット予約】${featuredLive.date} ${featuredLive.title}`;
     const body = [
       "R-MANAC チケット予約",
       "",
-      "公演: 2026.07.18（土） 堺轟音",
-      "会場: 堺東 Goith",
-      "時間: OPEN 18:00 / START 18:30",
+      `公演: ${featuredLive.date} ${featuredLive.title}`,
+      `会場: ${featuredLive.venue}`,
+      `時間: ${featuredLive.time}`,
       "",
       `お名前: ${name}`,
       `チケット枚数: ${tickets}枚`,
@@ -25,6 +27,20 @@ export function ReservePage() {
 
     window.location.href = `mailto:${reserveEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
+
+  if (!showReservation) {
+    return (
+      <PageShell>
+        <section className="mx-auto max-w-[900px] px-6 py-24 text-center md:px-10 md:py-36">
+          <p className="text-sm font-bold uppercase tracking-[0.22em] text-[var(--color-accent)]">Reservation</p>
+          <h1 className="mt-6 text-4xl font-black leading-tight md:text-5xl">現在受付中のライブ予約はありません。</h1>
+          <ButtonLink href="/live" className="mt-10">
+            ライブ情報へ戻る
+          </ButtonLink>
+        </section>
+      </PageShell>
+    );
+  }
 
   return (
     <PageShell>
@@ -37,7 +53,7 @@ export function ReservePage() {
           <div className="mt-8 h-1 w-14 bg-[var(--color-accent)]" />
           <img
             src={assets.photos.nextLiveFlyer}
-            alt="2026年7月18日 堺轟音 フライヤー"
+            alt={`${featuredLive.date} ${featuredLive.title} フライヤー`}
             className="mt-10 max-h-[520px] w-full bg-white object-contain shadow-[var(--shadow-soft)]"
           />
         </div>
@@ -47,8 +63,12 @@ export function ReservePage() {
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">
               Next Live
             </p>
-            <h2 className="mt-4 text-3xl font-black">2026.07.18（土） 堺轟音</h2>
-            <p className="mt-3 text-lg text-[var(--color-muted)]">堺東 Goith / OPEN 18:00 / START 18:30</p>
+            <h2 className="mt-4 text-3xl font-black">
+              {featuredLive.date} {featuredLive.title}
+            </h2>
+            <p className="mt-3 text-lg text-[var(--color-muted)]">
+              {featuredLive.venue} / {featuredLive.time}
+            </p>
           </div>
 
           <form className="mt-8 grid gap-6" onSubmit={handleSubmit}>
