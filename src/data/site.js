@@ -8,12 +8,12 @@ export const siteMeta = {
 };
 
 export const featuredLive = {
-  date: "2026.07.18（土）",
-  title: "堺轟音",
-  venue: "堺東 Goith",
-  time: "OPEN 18:00 / START 18:30",
-  price: "ADV ¥2800 / DOOR ¥3300",
-  visibleUntil: "2026-07-19T00:00:00+09:00",
+  date: "2026.08.14（金）",
+  title: "TONE CONTROL",
+  venue: "BAR TONE8.0 + BASEMENT GALLERY",
+  time: "OPEN 19:00 / START 19:30",
+  price: "CHARGE ¥2,500 (+D)",
+  visibleUntil: "2026-08-15T00:00:00+09:00",
 };
 
 export function isLiveVisible(live = featuredLive, now = Date.now()) {
