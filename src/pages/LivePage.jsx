@@ -22,7 +22,7 @@ export function LivePage() {
           <img
             src={assets.photos.nextLiveFlyer}
             alt={`${featuredLive.date} ${featuredLive.title} フライヤー`}
-            className="aspect-[4/3] w-full bg-[var(--color-paper)] object-contain"
+            className="h-auto max-h-[560px] w-full bg-[var(--color-paper)] object-contain"
           />
           <div className="self-center">
             <span className="inline-flex bg-[var(--color-accent)] px-5 py-2 text-sm font-bold text-white">次回ライブ</span>

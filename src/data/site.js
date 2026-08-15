@@ -8,12 +8,12 @@ export const siteMeta = {
 };
 
 export const featuredLive = {
-  date: "2026.08.14（金）",
-  title: "TONE CONTROL",
-  venue: "BAR TONE8.0 + BASEMENT GALLERY",
-  time: "OPEN 19:00 / START 19:30",
-  price: "CHARGE ¥2,500 (+D)",
-  visibleUntil: "2026-08-15T00:00:00+09:00",
+  date: "2026.09.11（金）",
+  title: "Rolling Balls8 Vol.57",
+  venue: "Live Bar Balls8",
+  time: "OPEN 18:30 / START 19:00",
+  price: "CHARGE ¥2,500 + 1D（¥600）",
+  visibleUntil: "2026-09-12T00:00:00+09:00",
 };
 
 export function isLiveVisible(live = featuredLive, now = Date.now()) {

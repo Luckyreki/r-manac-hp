@@ -3,7 +3,7 @@ const asset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 export const assets = {
   logo: asset("/assets/r-manac-logo.png"),
   photos: {
-    nextLiveFlyer: asset("/assets/next-live-20260814.jpg"),
+    nextLiveFlyer: asset("/assets/next-live-20260911.jpg"),
     liveBlueGuitar: asset("/assets/live-blue-guitar.jpg"),
     liveBacklightGuitar: asset("/assets/live-backlight-guitar.jpg"),
     liveRedCloseup: asset("/assets/live-red-closeup.jpg"),
