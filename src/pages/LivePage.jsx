@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { assets } from "../data/assets.js";
-import { featuredLive, isLiveVisible } from "../data/site.js";
+import { isLiveVisible, upcomingLives } from "../data/site.js";
 import { ButtonLink, HeroBand, PageShell, SectionHeading, reveal } from "./PagePrimitives.jsx";
 
 export function LivePage() {
-  const showFeaturedLive = isLiveVisible();
+  const visibleLives = upcomingLives.filter((live) => isLiveVisible(live));
 
   return (
     <PageShell>
@@ -14,31 +14,39 @@ export function LivePage() {
         body="音が重なり、会場が揺れ、心が共鳴する。"
         image={assets.uiMockupsReal.live.primary}
       />
-      {showFeaturedLive && (
+      {visibleLives.map((live, index) => (
         <motion.section
-          className="mx-auto grid max-w-[1280px] gap-10 bg-white px-6 py-10 shadow-[var(--shadow-soft)] md:px-10 lg:grid-cols-[320px_1fr_220px]"
+          key={live.id}
+          className={`mx-auto grid max-w-[1280px] gap-10 bg-white px-6 py-10 shadow-[var(--shadow-soft)] md:px-10 ${
+            live.flyerAsset ? "lg:grid-cols-[320px_1fr_220px]" : "lg:grid-cols-[1fr_220px]"
+          }`}
           {...reveal}
         >
-          <img
-            src={assets.photos.nextLiveFlyer}
-            alt={`${featuredLive.date} ${featuredLive.title} フライヤー`}
-            className="h-auto max-h-[560px] w-full bg-[var(--color-paper)] object-contain"
-          />
+          {live.flyerAsset && (
+            <img
+              src={assets.photos[live.flyerAsset]}
+              alt={`${live.date} ${live.title} フライヤー`}
+              className="h-auto max-h-[560px] w-full bg-[var(--color-paper)] object-contain"
+            />
+          )}
           <div className="self-center">
-            <span className="inline-flex bg-[var(--color-accent)] px-5 py-2 text-sm font-bold text-white">次回ライブ</span>
-            <h2 className="mt-6 text-4xl font-black md:text-5xl">{featuredLive.date}</h2>
-            <p className="mt-5 text-2xl font-black">{featuredLive.title}</p>
-            <p className="mt-4 text-xl">{featuredLive.venue}</p>
-            <p className="mt-3 text-lg text-[var(--color-muted)]">{featuredLive.time}</p>
-            <p className="mt-2 text-lg text-[var(--color-muted)]">{featuredLive.price}</p>
+            <span className="inline-flex bg-[var(--color-accent)] px-5 py-2 text-sm font-bold text-white">
+              {index === 0 ? "次回ライブ" : "ライブ予定"}
+            </span>
+            <h2 className="mt-6 text-4xl font-black md:text-5xl">{live.date}</h2>
+            <p className="mt-5 text-2xl font-black">{live.title}</p>
+            {live.venue && <p className="mt-4 text-xl">{live.venue}</p>}
+            {live.performers && <p className="mt-4 text-lg">出演：{live.performers}</p>}
+            <p className="mt-3 text-lg text-[var(--color-muted)]">{live.time}</p>
+            <p className="mt-2 text-lg text-[var(--color-muted)]">{live.price}</p>
           </div>
           <div className="self-center">
-            <ButtonLink href="/reserve" className="w-full">
+            <ButtonLink href={`/reserve?event=${live.id}`} className="w-full">
               予約する
             </ButtonLink>
           </div>
         </motion.section>
-      )}
+      ))}
       <section className="mx-auto max-w-[1280px] px-6 py-20 md:px-10">
         <SectionHeading title="過去のライブ" />
         <div className="mt-8 grid grid-cols-2 gap-9 lg:grid-cols-4">

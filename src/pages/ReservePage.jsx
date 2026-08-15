@@ -1,25 +1,40 @@
 import { useState } from "react";
 import { assets } from "../data/assets.js";
-import { featuredLive, isLiveVisible } from "../data/site.js";
+import { isLiveVisible, upcomingLives } from "../data/site.js";
 import { ButtonLink, PageShell } from "./PagePrimitives.jsx";
 
 const reserveEmail = "rmanac0805@gmail.com";
 
+function getRequestedLiveId() {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  const query = window.location.protocol === "file:" ? window.location.hash.split("?")[1] : window.location.search;
+  return new URLSearchParams(query || "").get("event");
+}
+
 export function ReservePage() {
   const [name, setName] = useState("");
   const [tickets, setTickets] = useState(1);
-  const showReservation = isLiveVisible();
+  const visibleLives = upcomingLives.filter((live) => isLiveVisible(live));
+  const requestedLiveId = getRequestedLiveId();
+  const selectedLive = requestedLiveId
+    ? visibleLives.find((live) => live.id === requestedLiveId)
+    : visibleLives[0];
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const subject = `【チケット予約】${featuredLive.date} ${featuredLive.title}`;
+    const subject = `【チケット予約】${selectedLive.date} ${selectedLive.title}`;
     const body = [
       "R-MANAC チケット予約",
       "",
-      `公演: ${featuredLive.date} ${featuredLive.title}`,
-      `会場: ${featuredLive.venue}`,
-      `時間: ${featuredLive.time}`,
+      `公演: ${selectedLive.date} ${selectedLive.title}`,
+      ...(selectedLive.venue ? [`会場: ${selectedLive.venue}`] : []),
+      ...(selectedLive.performers ? [`出演: ${selectedLive.performers}`] : []),
+      `時間: ${selectedLive.time}`,
+      `料金: ${selectedLive.price}`,
       "",
       `お名前: ${name}`,
       `チケット枚数: ${tickets}枚`,
@@ -28,7 +43,7 @@ export function ReservePage() {
     window.location.href = `mailto:${reserveEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
-  if (!showReservation) {
+  if (!selectedLive) {
     return (
       <PageShell>
         <section className="mx-auto max-w-[900px] px-6 py-24 text-center md:px-10 md:py-36">
@@ -44,18 +59,24 @@ export function ReservePage() {
 
   return (
     <PageShell>
-      <section className="mx-auto grid max-w-[1180px] gap-12 px-6 py-20 md:px-10 lg:grid-cols-[420px_1fr]">
+      <section
+        className={`mx-auto grid max-w-[1180px] gap-12 px-6 py-20 md:px-10 ${
+          selectedLive.flyerAsset ? "lg:grid-cols-[420px_1fr]" : "lg:grid-cols-[300px_1fr]"
+        }`}
+      >
         <div>
           <p className="mb-5 text-sm font-bold uppercase tracking-[0.22em] text-[var(--color-accent)]">
             Reservation
           </p>
           <h1 className="whitespace-nowrap text-4xl font-black leading-tight md:text-5xl">チケット予約</h1>
           <div className="mt-8 h-1 w-14 bg-[var(--color-accent)]" />
-          <img
-            src={assets.photos.nextLiveFlyer}
-            alt={`${featuredLive.date} ${featuredLive.title} フライヤー`}
-            className="mt-10 max-h-[520px] w-full bg-white object-contain shadow-[var(--shadow-soft)]"
-          />
+          {selectedLive.flyerAsset && (
+            <img
+              src={assets.photos[selectedLive.flyerAsset]}
+              alt={`${selectedLive.date} ${selectedLive.title} フライヤー`}
+              className="mt-10 max-h-[520px] w-full bg-white object-contain shadow-[var(--shadow-soft)]"
+            />
+          )}
         </div>
 
         <div className="self-center rounded-md bg-white p-7 shadow-[var(--shadow-soft)] md:p-10">
@@ -64,11 +85,12 @@ export function ReservePage() {
               Next Live
             </p>
             <h2 className="mt-4 text-3xl font-black">
-              {featuredLive.date} {featuredLive.title}
+              {selectedLive.date} {selectedLive.title}
             </h2>
-            <p className="mt-3 text-lg text-[var(--color-muted)]">
-              {featuredLive.venue} / {featuredLive.time}
-            </p>
+            {selectedLive.venue && <p className="mt-3 text-lg">{selectedLive.venue}</p>}
+            {selectedLive.performers && <p className="mt-3 text-base">出演：{selectedLive.performers}</p>}
+            <p className="mt-3 text-lg text-[var(--color-muted)]">{selectedLive.time}</p>
+            <p className="mt-2 text-lg text-[var(--color-muted)]">{selectedLive.price}</p>
           </div>
 
           <form className="mt-8 grid gap-6" onSubmit={handleSubmit}>

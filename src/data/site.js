@@ -7,16 +7,29 @@ export const siteMeta = {
   base: "大阪・堺を拠点に活動するアコギ・ループアーティスト。",
 };
 
-export const featuredLive = {
-  date: "2026.09.11（金）",
-  title: "Rolling Balls8 Vol.57",
-  venue: "Live Bar Balls8",
-  time: "OPEN 18:30 / START 19:00",
-  price: "CHARGE ¥2,500 + 1D（¥600）",
-  visibleUntil: "2026-09-12T00:00:00+09:00",
-};
+export const upcomingLives = [
+  {
+    id: "rolling-balls8-20260911",
+    date: "2026.09.11（金）",
+    title: "Rolling Balls8 Vol.57",
+    venue: "Live Bar Balls8",
+    time: "OPEN 18:30 / START 19:00",
+    price: "CHARGE ¥2,500 + 1D（¥600）",
+    flyerAsset: "nextLiveFlyer",
+    visibleUntil: "2026-09-12T00:00:00+09:00",
+  },
+  {
+    id: "tobira-thursday-night-20261001",
+    date: "2026.10.01（木）",
+    title: "TOBIRA Thursday Night",
+    performers: "黒猫のミヤ / R-MANAC / andmore",
+    time: "OPEN 18:30 / START 19:00",
+    price: "Music charge ¥2,400（1D別）",
+    visibleUntil: "2026-10-02T00:00:00+09:00",
+  },
+];
 
-export function isLiveVisible(live = featuredLive, now = Date.now()) {
+export function isLiveVisible(live, now = Date.now()) {
   return now < new Date(live.visibleUntil).getTime();
 }
 
