@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Seo } from "./components/Seo.jsx";
 import { assets } from "./data/assets.js";
 import { Footer, Header } from "./layouts/index.js";
 import { ContactPage } from "./pages/ContactPage.jsx";
@@ -46,6 +47,7 @@ export default function App() {
 
   return (
     <>
+      <Seo pathname={pathname} />
       <Header logoSrc={assets.logo} items={navigationItems} activePath={pathname} />
       <Page />
       <Footer logoSrc={assets.logo} items={navigationItems} activePath={pathname} />

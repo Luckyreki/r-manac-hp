@@ -1,4 +1,15 @@
 {
+  "headers": [
+    {
+      "source": "/reserve",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
