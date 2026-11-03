@@ -15,12 +15,14 @@ export function ProfilePage() {
       <section className="mx-auto grid max-w-[1140px] items-center gap-16 px-6 pb-10 pt-8 md:grid-cols-[420px_1fr] md:px-10">
         <motion.img
           src={assets.uiMockupsReal.profile.primary}
-          alt="R-MANAC profile"
+          alt="路地に立つデニムジャケット姿のR-MANAC"
           className="aspect-[4/5] w-full object-cover object-[center_top] md:h-[520px] md:aspect-auto md:object-[center_56%]"
           {...reveal}
         />
-        <motion.div className="whitespace-pre-line text-lg leading-10 text-[#171717]" {...reveal}>
-          {profileText}
+        <motion.div {...reveal}>
+          <h2 className="text-3xl font-black">R-MANAC（アール・マナック）</h2>
+          <p className="mt-2 text-sm text-[var(--color-muted)]">アコギ・ループアーティスト / 大阪・堺</p>
+          <div className="mt-6 whitespace-pre-line text-lg leading-10 text-[#171717]">{profileText}</div>
         </motion.div>
       </section>
       <motion.section

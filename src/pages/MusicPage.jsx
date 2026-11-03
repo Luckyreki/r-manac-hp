@@ -1,6 +1,7 @@
 import { Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { assets } from "../data/assets.js";
+import { releases } from "../data/site.js";
 import { HeroBand, PageShell, SectionHeading, reveal } from "./PagePrimitives.jsx";
 
 const musicLinks = {
@@ -12,14 +13,17 @@ const musicLinks = {
 const liveSessionThumbnails = [
   {
     image: assets.photos.liveBlueGuitar,
+    alt: "青い照明の中でアコースティックギターを弾くR-MANAC",
     className: "object-[42%_28%]",
   },
   {
     image: assets.uiMockupsReal.live.secondary,
+    alt: "ライブハウスのステージ全体とR-MANAC",
     className: "object-[66%_28%]",
   },
   {
     image: assets.photos.liveSideVocal,
+    alt: "マイクに向かって歌うR-MANACの横顔",
     className: "object-[45%_30%]",
   },
 ];
@@ -74,6 +78,26 @@ export function MusicPage() {
           ))}
         </motion.div>
       </section>
+      <section id="discography" className="mx-auto max-w-[1280px] px-6 pb-20 md:px-10">
+        <SectionHeading title="Discography" body="配信中の作品（新しい順）" />
+        <ul className="mt-8 divide-y divide-[var(--color-line)] border-y border-[var(--color-line)]">
+          {releases.map((release) => (
+            <li key={`${release.type}-${release.title}`} className="flex flex-wrap items-baseline gap-x-6 gap-y-1 py-5">
+              <span className="w-14 text-sm font-bold text-[var(--color-muted)]">{release.year}</span>
+              <h3 className="text-xl font-black">
+                {release.type === "Album" ? `『${release.title}』` : `「${release.title}」`}
+              </h3>
+              <span className="text-sm text-[var(--color-muted)]">
+                {release.type === "Album" ? "アルバム" : "シングル"}
+                {release.isLatest && " / 最新リリース"}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-5 text-sm text-[var(--color-muted)]">
+          各作品はSpotify・Apple Musicほか主要配信サービスで聴けます。
+        </p>
+      </section>
       <section id="live-session" className="mx-auto grid max-w-[1280px] gap-12 px-6 pb-24 md:px-10 lg:grid-cols-[300px_1fr_230px]">
         <SectionHeading title="Live Session" body={"ライブの空気をそのままに。\nR-MANACのライブ映像を掲載。"} />
         <motion.a
@@ -83,17 +107,25 @@ export function MusicPage() {
           className="relative aspect-[4/5] overflow-hidden md:h-[350px] md:aspect-auto"
           {...reveal}
         >
-          <img src={assets.uiMockupsReal.music.secondary} alt="" className="h-full w-full object-cover object-[center_top]" />
+          <img
+            src={assets.uiMockupsReal.music.secondary}
+            alt="R-MANACのライブ映像をYouTubeで見る"
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover object-[center_top]"
+          />
           <span className="absolute inset-0 m-auto flex h-24 w-24 items-center justify-center rounded-full border-4 border-white text-white">
             <Play size={38} fill="currentColor" />
           </span>
         </motion.a>
         <div className="grid gap-5">
-          {liveSessionThumbnails.map(({ image, className }) => (
+          {liveSessionThumbnails.map(({ image, alt, className }) => (
             <motion.img
               key={image}
               src={image}
-              alt=""
+              alt={alt}
+              loading="lazy"
+              decoding="async"
               className={`aspect-[16/9] w-full object-cover lg:h-[100px] lg:aspect-auto ${className}`}
               {...reveal}
             />

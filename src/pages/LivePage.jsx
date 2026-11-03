@@ -1,10 +1,18 @@
 import { motion } from "framer-motion";
 import { assets } from "../data/assets.js";
-import { isLiveVisible, upcomingLives } from "../data/site.js";
+import { getPastLives, isLiveVisible, upcomingLives } from "../data/site.js";
 import { ButtonLink, HeroBand, PageShell, SectionHeading, reveal } from "./PagePrimitives.jsx";
+
+const pastLivePhotos = [
+  { key: "liveBlueGuitar", alt: "青い照明の中でアコースティックギターを弾くR-MANAC" },
+  { key: "liveRedCloseup", alt: "赤い照明の中で歌うR-MANACのアップ" },
+  { key: "liveAmberStage", alt: "オレンジ色の照明のステージで演奏するR-MANAC" },
+  { key: "liveStageWide", alt: "ライブハウスのステージ全体とR-MANAC" },
+];
 
 export function LivePage() {
   const visibleLives = upcomingLives.filter((live) => isLiveVisible(live));
+  const pastLives = getPastLives();
 
   return (
     <PageShell>
@@ -47,14 +55,47 @@ export function LivePage() {
           </div>
         </motion.section>
       ))}
+      {visibleLives.length === 0 && (
+        <motion.section
+          className="mx-auto max-w-[1280px] bg-white px-6 py-10 shadow-[var(--shadow-soft)] md:px-10"
+          {...reveal}
+        >
+          <h2 className="text-2xl font-black md:text-3xl">次回の出演予定は準備中です</h2>
+          <p className="mt-4 text-lg leading-8 text-[#2a2a2a]">
+            決まり次第、このページとSNSでお知らせします。最新情報はInstagramやXをフォローしてチェックしてください。
+          </p>
+          <div className="mt-7 flex flex-wrap gap-4">
+            <ButtonLink href="/sns">SNSをフォローする</ButtonLink>
+            <ButtonLink href="/contact" filled={false}>
+              出演依頼はこちら
+            </ButtonLink>
+          </div>
+        </motion.section>
+      )}
       <section className="mx-auto max-w-[1280px] px-6 py-20 md:px-10">
         <SectionHeading title="過去のライブ" />
+        {pastLives.length > 0 && (
+          <ul className="mt-8 divide-y divide-[var(--color-line)] border-y border-[var(--color-line)]">
+            {pastLives.map((live) => (
+              <li key={live.id} className="grid gap-1 py-5 md:grid-cols-[220px_1fr] md:gap-8">
+                <span className="font-bold">{live.date}</span>
+                <span>
+                  {live.title}
+                  {live.venue && ` / ${live.venue}`}
+                  {live.performers && <span className="block text-sm text-[var(--color-muted)]">出演：{live.performers}</span>}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
         <div className="mt-8 grid grid-cols-2 gap-9 lg:grid-cols-4">
-          {[assets.photos.liveBlueGuitar, assets.uiMockupsReal.live.primary, assets.uiMockupsReal.live.featured, assets.uiMockupsReal.live.secondary].map((image) => (
+          {pastLivePhotos.map(({ key, alt }) => (
             <motion.img
-              key={image}
-              src={image}
-              alt=""
+              key={key}
+              src={assets.photos[key]}
+              alt={alt}
+              loading="lazy"
+              decoding="async"
               className="aspect-[4/3] w-full object-cover object-[center_top] lg:h-[120px] lg:aspect-auto"
               {...reveal}
             />

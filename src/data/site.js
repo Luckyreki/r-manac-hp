@@ -7,7 +7,27 @@ export const siteMeta = {
   base: "大阪・堺を拠点に活動するアコギ・ループアーティスト。",
 };
 
+// Keep in date order (oldest first). After visibleUntil, an entry moves to "過去のライブ".
 export const upcomingLives = [
+  {
+    id: "sakai-goon-20260718",
+    date: "2026.07.18（土）",
+    title: "堺轟音（堺東 Goith 22nd ANNIVERSARY SP!!）",
+    venue: "堺東 Goith",
+    time: "OPEN 18:00 / START 18:30",
+    price: "ADV ¥2,800 / DOOR ¥3,300（1D ¥700別）",
+    visibleUntil: "2026-07-19T00:00:00+09:00",
+  },
+  {
+    id: "tone-control-20260814",
+    date: "2026.08.14（金）",
+    title: "TONE CONTROL",
+    venue: "BAR TONE8.0 + BASEMENT GALLERY",
+    performers: "Urey / R-MANAC / ボンスケ / ウメヤマカズユキ",
+    time: "OPEN 19:00 / START 19:30",
+    price: "CHARGE ¥2,500（1D別）",
+    visibleUntil: "2026-08-15T00:00:00+09:00",
+  },
   {
     id: "rolling-balls8-20260911",
     date: "2026.09.11（金）",
@@ -32,6 +52,20 @@ export const upcomingLives = [
 export function isLiveVisible(live, now = Date.now()) {
   return now < new Date(live.visibleUntil).getTime();
 }
+
+// Lives whose date has passed move to the "past appearances" list automatically.
+export function getPastLives(now = Date.now()) {
+  return upcomingLives.filter((live) => !isLiveVisible(live, now)).reverse();
+}
+
+// Released works confirmed on the TuneCore Japan artist page (checked 2026-11-03).
+// Add new releases at the top. Unreleased songs (e.g. FREE ON MY OWN tracks) do not go here.
+export const releases = [
+  { title: "えぇ堺！", type: "Single", year: "2026", datePublished: "2026-09-11", isLatest: true },
+  { title: "アイスクリーム", type: "Single", year: "2023" },
+  { title: "18", type: "Single", year: "2021" },
+  { title: "R-MANAC", type: "Album", year: "2021" },
+];
 
 export const featureLinks = [
   {

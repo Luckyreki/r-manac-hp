@@ -11,9 +11,11 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/profile", "destination": "/profile/index.html" },
+    { "source": "/music", "destination": "/music/index.html" },
+    { "source": "/live", "destination": "/live/index.html" },
+    { "source": "/sns", "destination": "/sns/index.html" },
+    { "source": "/contact", "destination": "/contact/index.html" },
+    { "source": "/reserve", "destination": "/reserve/index.html" }
   ]
 }

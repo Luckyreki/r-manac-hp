@@ -5,6 +5,7 @@ import { Footer, Header } from "./layouts/index.js";
 import { ContactPage } from "./pages/ContactPage.jsx";
 import { LivePage } from "./pages/LivePage.jsx";
 import { MusicPage } from "./pages/MusicPage.jsx";
+import { NotFoundPage } from "./pages/NotFoundPage.jsx";
 import { ProfilePage } from "./pages/ProfilePage.jsx";
 import { ReservePage } from "./pages/ReservePage.jsx";
 import { SnsPage } from "./pages/SnsPage.jsx";
@@ -32,7 +33,7 @@ const routes = {
 
 export default function App() {
   const [pathname, setPathname] = useState(getCurrentPath);
-  const Page = routes[pathname] || TopPage;
+  const Page = routes[pathname] || NotFoundPage;
 
   useEffect(() => {
     const syncPath = () => setPathname(getCurrentPath());
